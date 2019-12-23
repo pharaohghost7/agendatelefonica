@@ -90,7 +90,7 @@
                     <td>{{ $item->departamento }}</td>
                     <td>{{ $item->salario }}</td>
                     <td>{{ $item->fechadenacimiento }}</td>
-                    <td><a class="btn btn-success btncolorblanco">
+                    <td><a class="btn btn-success btncolorblanco" href="{{ route('agenda.edit', $item->id) }}">
                         <i class="fa fa-edit"></i> Editar 
                       </a>
 
@@ -113,6 +113,7 @@
 
             </tbody>
         </table>
+        {{ $agenda }}
     </div>
 
     @include('plantilla.footer',['container'=>'container-fluid'])

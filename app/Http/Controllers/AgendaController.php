@@ -15,7 +15,7 @@ class AgendaController extends Controller
     public function index()
     {
         //
-        $agenda = Agenda::all();
+        $agenda = Agenda::paginate(5);
        return view('agenda.index', compact('agenda'));
        
        
@@ -76,6 +76,8 @@ class AgendaController extends Controller
     public function edit($id)
     {
         //
+        $agenda= Agenda::findOrFail($id);
+        return view('agenda.edit', compact('agenda'));
     }
 
     /**
@@ -87,7 +89,20 @@ class AgendaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $agenda= Agenda::findOrFail($id);
+        $agenda->nombres =  $request->nombres;
+        $agenda->apellidos =  $request->apellidos;
+        $agenda->telefono =  $request->telefono;
+        $agenda->celular =  $request->celular;
+        $agenda->sexo =  $request->sexo;
+        $agenda->email =  $request->email;
+        $agenda->posicion =  $request->posicion;
+        $agenda->departamento =  $request->departamento;
+        $agenda->salario =  $request->salario;
+        $agenda->fechadenacimiento =  $request->fechadenacimiento;
+        $agenda->save();
+        return redirect()->route('agenda.index')->with('datos','informacion actualizada correctamente');
+
     }
 
     /**
@@ -99,7 +114,12 @@ class AgendaController extends Controller
     public function destroy($id)
     {
         //
+        $agenda = Agenda::findOrFail($id);
+        $agenda->delete();
+        return redirect()->route('agenda.index')->with('datos','informacion Eliminada correctamente');
     }
+
+    
 
     public function confirm($id)
     {

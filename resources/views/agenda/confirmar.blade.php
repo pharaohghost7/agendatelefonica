@@ -2,6 +2,7 @@
 
 @section('titulo', 'confirmar')
 
+@include('plantilla.nav')
 @section('contenido')
     <div class="container py-5">
         <h1>¿Deseas el registro de {{ $agenda->nombres }} {{ $agenda->apellidos }}?</h1>

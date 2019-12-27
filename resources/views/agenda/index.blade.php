@@ -1,4 +1,4 @@
-@extends('plantilla.plantilla');
+@extends('plantilla.plantilla')
 
 @section('titulo', 'Agenda')
 
@@ -33,24 +33,26 @@
 
     <div class="container-fluid">
         <br>
-        <nav class="navbar navbar-light">
-            <a class="navbar-brand" ><img id="icono" class="img-responsive" src="https://imge.apk.tools/300/d/3/1/com.widesoft.guiatelefonica.png" alt=""></a>
-            <ul class="nav flex-column text-center">
-                <li class="nav-item">
-                    <span class="nav-link active"> Bienvenido Andres</span>
-                </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link">Cerrar sesión</a>
-                </li>
-            </ul>
-        </nav>
+        @include('plantilla.nav')
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="#">Home</a></li>
-                <li class="breadcrumb-item"><a href="#">Library</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Data</li>
+                <li class="breadcrumb-item active"><a href="{{ route('agenda.index') }}">Inicio</a></li>
+                
             </ol>
         </nav>
+
+        <nav class="navbar navbar-light float-right">
+            <form class="form-inline">
+                <select name="tipo" class="custom-select float-right">
+                    <option selected>Tipo</option>
+                    <option value="nombres">nombres</option>
+                    <option value="apellidos">apellidos</option>
+                    <option value="email">email</option>
+                  </select>
+              <input class="form-control mr-sm-2" type="search" placeholder="Buscar por apellido" name="buscarpor" aria-label="Search">
+              <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
+            </form>
+          </nav>
 
         <br>
         <h1 class="text-center">Datos personales</h1>
@@ -80,7 +82,7 @@
                @foreach($agenda as $item)
                <tr align="center" >
                     <td>{{ $item->id }}</td>
-                    <td>{{ $item->nombres }} {{ $item->apellidos }}</td>
+                    <td><a href="{{ route('agenda.show', $item->id) }}">{{ $item->nombres }} {{ $item->apellidos }}</a></td>
                     
                     <td>{{ $item->telefono }}</td>
                     <td>{{ $item->celular }}</td>

@@ -11,11 +11,19 @@ class AgendaController extends Controller
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
+     * 
      */
-    public function index()
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
+    public function index( Request $request)
     {
         //
-        $agenda = Agenda::paginate(5);
+        $buscar = $request->get('buscarpor');
+        $tipo = $request->get('tipo');
+        $agenda = Agenda::buscarpor($tipo, $buscar)->paginate(5);
        return view('agenda.index', compact('agenda'));
        
        
@@ -65,6 +73,8 @@ class AgendaController extends Controller
     public function show($id)
     {
         //
+        $agenda= Agenda::findOrFail($id);
+        return view('agenda.show', compact('agenda'));
     }
 
     /**

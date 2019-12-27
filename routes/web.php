@@ -28,4 +28,4 @@ Route::get('/cancelar', function () {
     
 })->name('cancelar');
 
-Route::get('/agenda/{id}/confirm', 'AgendaController@confirm')->name('agenda.confirm');
+Route::get('/agenda/{id}/confirm', 'AgendaController@confirm')->name('agenda.confirm')->middleware('auth');
